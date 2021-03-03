@@ -1,0 +1,31 @@
+.container-fluid {
+    height: 100%;
+}
+
+.login-card {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.rounded {
+    margin: 3%;
+    padding: 20px;
+    background: #fff;
+}
+
+.login-items {
+    padding: 0 16px;
+    font-size: 16px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px;
+}
+
+
+.form-text {
+    color: #f62525;
+}
