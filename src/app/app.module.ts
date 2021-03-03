@@ -8,9 +8,14 @@ import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+
+import { LoginService } from './services/login/login.service';
+
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { reducers, metaReducers } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { LoginEffects } from './store/effects/login.effects';
 
 @NgModule({
   declarations: [
@@ -24,9 +29,12 @@ import { reducers, metaReducers } from './store';
     FormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([LoginEffects])
   ],
-  providers: [],
+  providers: [
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
