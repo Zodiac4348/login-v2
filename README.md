@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Running the application locally
 
-Run `npm install` after cloning the solution. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm install` after cloning the solution. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Note: If there are errors encountered related to ngrx dependencies, run `npm install @ngrx/store@10.1.2 --save` for ngrx store, `npm install @ngrx/effects@10.1.2 --save`for ngrx effects, `npm install @ngrx/store-devtools@10.1.2 --save` for ngrx devtools, and `npm install @ngrx/schematics@10.1.2 --save-dev` for ngrx schematics.
 
 ## Running unit tests locally
 
