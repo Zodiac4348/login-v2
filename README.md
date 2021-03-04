@@ -8,7 +8,12 @@ Run `npm install` after cloning the solution. Run `ng serve` for a dev server. N
 
 ## Running unit tests locally
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). Files that has unit test are the following:
+- home component
+- login component
+- login reducer
+- login selector 
+- login effect
 
 ## What to improve
 
