@@ -4,6 +4,8 @@ import { AppState } from 'src/app/store';
 import * as fromLoginAction from '../../store/actions/login.actions';
 import * as fromLoginSelector from '../../store/selectors/login.selectors';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginDetails } from 'src/app/models/login-details.model';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
-  isUsernameValid: boolean = true;
-  isPasswordValid: boolean = true;
   isLoginValid: boolean;
-  hasUserSubmitted: boolean = false;
+  loginForm: FormGroup; 
 
   constructor(
     private store: Store<AppState>,
@@ -25,38 +23,40 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.validateLoginCredential()
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.email),
+      password: new FormControl('', [Validators.minLength(6), Validators.maxLength(20)])
+    });
+
+    this.validateLoginStatus()
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   submit(): void {
-    // this.isLoginValid = true;
+    if(!this.loginForm.invalid) {
+      let loginDetails: LoginDetails = {
+        username: this.loginForm.value.username,
+        password: this.loginForm.value.password
+      }
 
-    if(this.username) {
-      this.isUsernameValid = this.username?.match(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi)?
-      true: false;
-    } else {
-      this.isUsernameValid = true;
+      this.store.dispatch(fromLoginAction.addLogin({data: loginDetails}));
     }
+  } 
 
-    if(this.password) {
-      this.isPasswordValid = this.password?.length >= 6 && this.password?.length <= 20;
-    } else {
-      this.isPasswordValid = true;
-    }
-
-    if((this.isUsernameValid && this.username) && (this.isPasswordValid && this.password)) {
-      this.hasUserSubmitted = true;
-      this.store.dispatch(fromLoginAction.addLogin({data: {username: this.username, password: this.password}}));
-    } 
-  }
-
-  validateLoginCredential(): void {
+  validateLoginStatus(): void {
     this.store.pipe(select(fromLoginSelector.selectLoginStatus)).subscribe(status => {
+      this.isLoginValid = status;
+      
       if(status) {
         this.router.navigate(['home']);
       } 
-
-      this.isLoginValid = status;
     });
   }
 }

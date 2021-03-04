@@ -30,7 +30,10 @@ h1 {
     padding: 8px 16px;
 }
 
-
 .form-text {
     color: #f62525;
+}
+
+.alert {
+    margin-top: 16px;
 }
