@@ -27,7 +27,7 @@ export const reducer = createReducer(
   on(fromLoginAction.resetLogin, (state) => {
     return {
       ...state,
-      name: null,
+      username: null,
       password: null,
       isLoginSuccess: null
     }

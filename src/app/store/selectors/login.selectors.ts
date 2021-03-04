@@ -5,16 +5,6 @@ export const selectLoginFeature = createFeatureSelector<State>(
     loginFeatureKey
 );
 
-export const selectUsername = createSelector(
-    selectLoginFeature,
-    (state: State) => state.username
-);
-
-export const selectPassword = createSelector(
-    selectLoginFeature,
-    (state: State) => state.password
-);
-
 export const selectLoginStatus = createSelector(
     selectLoginFeature,
     (state: State) => state.isLoginSuccess
